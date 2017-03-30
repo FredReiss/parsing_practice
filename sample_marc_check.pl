@@ -12,7 +12,8 @@ open(OUTFILE,">test_output.tsv");
 
 my $parser = XML::LibXML->new();
 my $doc = $parser->parse_file($fileinput);
-#in this scenario, we assume the file input contains XML with a structure of collection > record, and that the contents are MARC XML
+#in this scenario, we assume the file input contains XML with a structure of collection > record, 
+#and that the contents are MARC XML
 #for output, I want the MMS ID (found in the 001 controlfield) and the title/subtitle (in the 245 datafield within subfields a & b ) 
 foreach my $record ($doc->findnodes('/collection/record')) {
    foreach my $controlfield ($record->findnodes('./controlfield')) {
@@ -37,7 +38,7 @@ foreach my $record ($doc->findnodes('/collection/record')) {
             $title = $title . " " . $dtagval;
           }
        }
-	 }
+     }
      #I also want to test the 856 tag to see if it was an ebrary dda (that value is in the 856$x)
      if ($dtag eq "856") {
        foreach my $marcSubfield ($marcTag->findnodes('./subfield')) {
